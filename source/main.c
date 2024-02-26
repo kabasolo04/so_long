@@ -6,7 +6,7 @@
 /*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 17:55:26 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/02/26 14:09:02 by kabasolo         ###   ########.fr       */
+/*   Updated: 2024/02/26 14:11:43 by kabasolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,10 @@ void	ft_freemap(char **map)
 	free(map);
 }
 
-static void	ft_free_sprites(t_game *game)
+static int	ft_close(t_game *game)
 {
+	if (game->mlx && game->win_ptr)
+		mlx_destroy_window (game->mlx, game->win_ptr);
 	if (game->wall)
 		mlx_destroy_image(game->mlx, game->wall);
 	if (game->player)
@@ -34,13 +36,6 @@ static void	ft_free_sprites(t_game *game)
 		mlx_destroy_image(game->mlx, game->coin);
 	if (game->exit)
 		mlx_destroy_image(game->mlx, game->exit);
-}
-
-static int	ft_close(t_game *game)
-{
-	if (game->mlx && game->win_ptr)
-		mlx_destroy_window (game->mlx, game->win_ptr);
-	ft_free_sprites (game);
 	free (game->mlx);
 	ft_freemap (game->map);
 	free (game);
@@ -71,6 +66,19 @@ static int	ft_ber(char *arg)
 	return (0);
 }
 
+static void	ft_start_game(t_game	game)
+{
+	game.mlx = mlx_init();
+	game.moves = 0;
+	game.win_ptr = mlx_new_window (game.mlx, game.col * PIX, game.lines * PIX,
+			"SO_LONG");
+	ft_draw_map (&game);
+	mlx_hook(game.win_ptr, 17, 0, (int (*)())exit, &game);
+	mlx_key_hook(game.win_ptr, ft_key_hook, &game);
+	mlx_loop (game.mlx);
+	ft_close(&game);
+}
+
 int	main(int argc, char **argv)
 {
 	t_game	game;
@@ -84,14 +92,6 @@ int	main(int argc, char **argv)
 		return (close(game.fd), ft_errors(10), 1);
 	if (ft_get_data(&game, game.fd) != 0)
 		return (1);
-	game.mlx = mlx_init();
-	game.moves = 0;
-	game.win_ptr = mlx_new_window (game.mlx, game.col * PIX, game.lines * PIX,
-			"SO_LONG");
-	ft_draw_map (&game);
-	mlx_hook(game.win_ptr, 17, 0, (int (*)())exit, &game);
-	mlx_key_hook(game.win_ptr, ft_key_hook, &game);
-	mlx_loop (game.mlx);
-	ft_close(&game);
+	ft_start_game(game);
 	return (0);
 }
