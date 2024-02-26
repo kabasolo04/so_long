@@ -6,7 +6,7 @@
 /*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 11:39:44 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/02/26 12:40:49 by kabasolo         ###   ########.fr       */
+/*   Updated: 2024/02/26 14:08:01 by kabasolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,12 @@ static char	**ft_get_map(int fd)
 		map = ft_strjoin(temp, str);
 		free(temp);
 		if (str[0] == '\n')
-			return (free(str), free(map), ft_lecture_errors(5), NULL);
+			return (free(str), free(map), ft_errors(13), NULL);
 		free(str);
 		str = get_next_line(fd);
 	}
 	if (map[0] == '\0')
-		return (free(map), ft_lecture_errors(3), NULL);
+		return (free(map), ft_errors(11), NULL);
 	result = ft_split(map, '\n');
 	free(map);
 	return (result);
@@ -77,15 +77,15 @@ int	ft_get_data(t_game *data, int fd)
 	while (data->map[n])
 		n ++;
 	data->lines = n;
-	data->c = ft_find(data, 'C'); //Coin quantity
-	data->e = ft_find(data, 'E'); //Exit quantity
-	data->p = ft_find(data, 'P'); //Player quantity
+	data->c = ft_find(data, 'C');
+	data->e = ft_find(data, 'E');
+	data->p = ft_find(data, 'P');
 	if (data->p != 1)
-		return (ft_freemap(data->map), ft_map_errors(3), 1);
+		return (ft_freemap(data->map), ft_errors(3), 1);
 	if (data->c < 1)
-		return (ft_freemap(data->map), ft_map_errors(5), 1);
+		return (ft_freemap(data->map), ft_errors(5), 1);
 	if (data->e != 1)
-		return (ft_freemap(data->map), ft_map_errors(4), 1);
+		return (ft_freemap(data->map), ft_errors(4), 1);
 	data->map[data->p_y][data->p_x] = '0';
 	if (ft_checks(data))
 		return (ft_freemap(data->map), 1);

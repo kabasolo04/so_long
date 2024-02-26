@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_errors.c                                        :+:      :+:    :+:   */
+/*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 13:13:34 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/02/26 11:50:52 by kabasolo         ###   ########.fr       */
+/*   Updated: 2024/02/26 14:05:57 by kabasolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	ft_error_ms(char *ms)
 	write(2, "\n\n", 2);
 }
 
-void	ft_map_errors(int e)
+static void	ft_map_errors(int e)
 {
 	if (e == 0)
 		ft_error_ms("Not valid map, un-paring lenghts.");
@@ -39,20 +39,28 @@ void	ft_map_errors(int e)
 		ft_error_ms("All the collectables must be accesible for the player");
 }
 
-void ft_lecture_errors(int e)
+static void	ft_lecture_errors(int e)
 {
-	if (e == 0)
+	if (e == 8)
 		ft_error_ms("Non-valid argument quantity.");
-	if (e == 1)
-		ft_error_ms("Map must be named '.ber'.");
-	if (e == 2)
+	if (e == 9)
+		ft_error_ms("Map must be named '*.ber'.");
+	if (e == 10)
 		ft_error_ms("Non-valid fd.");
-	if (e == 3)
+	if (e == 11)
 		ft_error_ms("Map lecture went wrong.");
-	if (e == 4)
+	if (e == 12)
 		ft_error_ms("Could not open the map.");
-	if (e == 5)
+	if (e == 13)
 		ft_error_ms("There can not be more than one '\\n' on each line.");
-	if (e == 6)
+	if (e == 14)
 		ft_error_ms("Could not open textures.");
+	if (e == 15)
+		ft_error_ms("Map can not be named only '.ber'.");
+}
+
+void	ft_errors(int e)
+{
+	ft_map_errors(e);
+	ft_lecture_errors(e);
 }

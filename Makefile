@@ -6,19 +6,19 @@
 #    By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/13 15:51:14 by kabasolo          #+#    #+#              #
-#    Updated: 2024/02/26 12:52:31 by kabasolo         ###   ########.fr        #
+#    Updated: 2024/02/26 13:29:16 by kabasolo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = so_long
 
-SRC = 	src/main.c \
-		src/ft_get_data.c  \
-		src/ft_draw_map.c \
-		src/ft_key_hook.c \
-		src/errors.c \
-		src/ft_map_cpy.c \
-		src/ft_checks.c \
+SRC = 	source/main.c \
+		source/ft_get_data.c  \
+		source/ft_draw_map.c \
+		source/ft_key_hook.c \
+		source/errors.c \
+		source/ft_map_cpy.c \
+		source/ft_checks.c \
 
 OBJS = $(SRC:%.c=%.o)
 

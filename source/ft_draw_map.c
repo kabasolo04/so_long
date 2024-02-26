@@ -6,7 +6,7 @@
 /*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 18:24:45 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/02/26 11:54:24 by kabasolo         ###   ########.fr       */
+/*   Updated: 2024/02/26 14:07:41 by kabasolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ static void	ft_put_sprite(t_game *g, char c, int i, int j)
 	if (c == 'E')
 		mlx_put_image_to_window(g->mlx, g->win_ptr, g->exit, j * PIX, i * PIX);
 	if (c == 'P')
-		mlx_put_image_to_window(g->mlx, g->win_ptr, g->player, j * PIX, i * PIX);
+		mlx_put_image_to_window(g->mlx, g->win_ptr, g->player,
+			j * PIX, i * PIX);
 }
 
 void	ft_draw_map(t_game *game)
@@ -47,7 +48,7 @@ void	ft_draw_map(t_game *game)
 	size_t	x;
 
 	if (ft_load_sprites(game))
-		return (ft_lecture_errors(6), exit(0));
+		return (ft_errors(14), exit(0));
 	y = 0;
 	while (y < game->lines)
 	{
