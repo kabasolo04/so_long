@@ -6,7 +6,7 @@
 /*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 16:20:50 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/02/22 16:48:50 by kabasolo         ###   ########.fr       */
+/*   Updated: 2024/02/26 10:58:21 by kabasolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,21 @@
 
 static void	ft_refresh(t_game *g, size_t x, size_t y)
 {
-	mlx_put_image_to_window(g->mlx, g->win_ptr, g->floor, g->p_x * 32,
-		g->p_y * 32);
-	if (g->map[g->p_y][g->p_x] == 'E')
-		mlx_put_image_to_window(g->mlx, g->win_ptr, g->exit, g->p_x * 32,
-			g->p_y * 32);
-	g->p_x = x;
-	g->p_y = y;
-	mlx_put_image_to_window(g->mlx, g->win_ptr, g->floor, g->p_x * 32,
-		g->p_y * 32);
-	if (g->map[g->p_y][g->p_x] == 'E')
-		mlx_put_image_to_window(g->mlx, g->win_ptr, g->exit, g->p_x * 32,
-			g->p_y * 32);
-	mlx_put_image_to_window(g->mlx, g->win_ptr, g->player, x * 32, y * 32);
+	int	i;
+
+	i = 0;
+	while (i ++ <= 1)
+	{
+		if (g->map[g->p_y][g->p_x] != 'E')
+			mlx_put_image_to_window(g->mlx, g->win_ptr, g->floor, g->p_x * PIX,
+				g->p_y * PIX);
+		else
+			mlx_put_image_to_window(g->mlx, g->win_ptr, g->exit, g->p_x * PIX,
+				g->p_y * PIX);
+		g->p_x = x;
+		g->p_y = y;
+	}
+	mlx_put_image_to_window(g->mlx, g->win_ptr, g->player, x * PIX, y * PIX);
 }
 
 int	ft_key_hook(int key, t_game *g)

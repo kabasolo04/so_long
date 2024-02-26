@@ -6,7 +6,7 @@
 /*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 12:00:52 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/02/22 19:37:45 by kabasolo         ###   ########.fr       */
+/*   Updated: 2024/02/26 12:29:04 by kabasolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@
 #define DOWN 125
 #define LEFT 123
 #define RIGHT 124
+
+#define PIX 100
 
 typedef struct s_game
 {
@@ -59,17 +61,13 @@ typedef struct s_game
 	int		fd;
 }	t_game;
 
-char	**ft_get_map(int fd);
 int		ft_key_hook(int key, t_game *g);
 int		ft_get_data(t_game *data, int fd);
-void	ft_errors(int e);
-int		ft_map_check(t_game *data);
-int		ft_npc_errors(t_game *data);
+void	ft_map_errors(int e);
+void 	ft_lecture_errors(int e);
+void	ft_map_cpy(t_game *data);
+int		ft_checks(t_game *data);
 void	ft_draw_map(t_game *g);
-void	ft_free_sprites(t_game *game);
-void	load_sprites(t_game *game);
 void	ft_freemap(char **map);
-void	mlx_sleep(int milliseconds, t_game *game);
-int		ft_close(t_game *game);
 
 #endif //so_long

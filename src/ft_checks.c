@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_map_check.c                                     :+:      :+:    :+:   */
+/*   ft_checks.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/05 13:42:10 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/02/22 10:59:38 by kabasolo         ###   ########.fr       */
+/*   Created: 2024/02/21 12:03:51 by kabasolo          #+#    #+#             */
+/*   Updated: 2024/02/26 12:41:31 by kabasolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,8 @@ static int	ft_is_all_even(char **map)
 	i = 0;
 	while (map[i])
 	{
-		if (len != ft_strlen(map[i]))
+		if (len != ft_strlen(map[i ++]))
 			return (-1);
-		i ++;
 	}
 	return (0);
 }
@@ -65,14 +64,39 @@ static int	ft_is_all_legal(char **map)
 	}
 	return (0);
 }
-
-int	ft_map_check(t_game *data)
+static size_t	ft_flood_fill(char **map, char c, int x, int y)
 {
-	if (ft_is_all_legal(data->map) != 0)
-		return (ft_errors(2), -1);
-	if (ft_is_closed(data->map, data->col, data->lines) != 0)
-		return (ft_errors(1), -1);
-	if (ft_is_all_even(data->map) != 0)
-		return (ft_errors(0), -1);
+	int	num;
+
+	num = (map[y][x] == c);
+	if (map[y][x] != '1')
+	{
+		map[y][x] = '1';
+		num += ft_flood_fill(map, c, x + 1, y);
+		num += ft_flood_fill(map, c, x - 1, y);
+		num += ft_flood_fill(map, c, x, y + 1);
+		num += ft_flood_fill(map, c, x, y - 1);
+	}
+	return (num);
+}
+
+int	ft_checks(t_game *data)
+{
+	if (ft_is_all_legal(data->map))
+		return (ft_map_errors(2), 1);
+	if (ft_is_all_even(data->map))
+		return (ft_map_errors(0), 1);
+	if (ft_is_closed(data->map, data->col, data->lines))
+		return (ft_map_errors(1), 1);
+	ft_map_cpy(data);
+	if (ft_flood_fill(data->map_cpy, 'E', data->p_x, data->p_y) != 1 &&
+		data->map_cpy)
+		return (ft_freemap(data->map_cpy), ft_map_errors(6), 1);
+	ft_freemap(data->map_cpy);
+	ft_map_cpy(data);
+	if (ft_flood_fill(data->map_cpy, 'C', data->p_x, data->p_y) != data->c &&
+		data->map_cpy)
+		return (ft_freemap(data->map_cpy), ft_map_errors(7), 1);
+	ft_freemap(data->map_cpy);
 	return (0);
 }
