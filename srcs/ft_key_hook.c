@@ -6,11 +6,11 @@
 /*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 16:20:50 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/02/26 10:58:21 by kabasolo         ###   ########.fr       */
+/*   Updated: 2024/02/26 19:17:39 by kabasolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../so_long.h"
+#include "so_long.h"
 
 static void	ft_refresh(t_game *g, size_t x, size_t y)
 {

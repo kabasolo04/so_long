@@ -6,21 +6,11 @@
 /*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 17:55:26 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/02/26 14:11:43 by kabasolo         ###   ########.fr       */
+/*   Updated: 2024/02/27 10:38:05 by kabasolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../so_long.h"
-
-void	ft_freemap(char **map)
-{
-	int	i;
-
-	i = 0;
-	while (map[i])
-		free(map[i ++]);
-	free(map);
-}
+#include "so_long.h"
 
 static int	ft_close(t_game *game)
 {
@@ -46,23 +36,10 @@ static int	ft_close(t_game *game)
 static int	ft_ber(char *arg)
 {
 	int	l;
-	int	i;
 
 	l = ft_strlen(arg);
 	if (ft_strncmp (&arg[l - 4], ".ber", 4))
-		return (ft_errors(9), 1);
-	if (ft_strncmp (arg, ".ber", 4) == 0)
-		return (ft_errors(15), 1);
-	i = 0;
-	while (arg[i])
-	{
-		if (arg[i] == '/')
-		{
-			if (ft_strncmp (&arg[i + 1], ".ber", 4) == 0)
-				return (ft_errors(15), 1);
-		}
-		i ++;
-	}
+		return (1);
 	return (0);
 }
 
@@ -84,12 +61,12 @@ int	main(int argc, char **argv)
 	t_game	game;
 
 	if (argc != 2)
-		return (ft_errors(8), 1);
+		return (ft_error("Non-valid argument quantity."));
 	if (ft_ber(argv[1]))
-		return (1);
+		return (ft_error("Map must be named '*.ber'."));
 	game.fd = open(argv[1], O_RDONLY);
 	if (game.fd < 0)
-		return (close(game.fd), ft_errors(10), 1);
+		return (close(game.fd), ft_error("Non-valid fd."));
 	if (ft_get_data(&game, game.fd) != 0)
 		return (1);
 	ft_start_game(game);

@@ -1,43 +1,26 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/02/13 15:51:14 by kabasolo          #+#    #+#              #
-#    Updated: 2024/02/26 13:29:16 by kabasolo         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 NAME = so_long
+CC		= cc
+MLX_LIB = srcs/mlx/
+MLX_FLAGS = -L srcs/mlx/ -lmlx -framework OpenGL -framework AppKit
+LIBFT_LIB = srcs/libft/
+LIBFT_FLAGS = -L srcs/libft/ -lft
+DEBUG_FLAGS = -g3 -fsanitize=address
+RM		= rm -f
+CFLAGS = -Wall -Wextra -Werror
 
-SRC = 	source/main.c \
-		source/ft_get_data.c  \
-		source/ft_draw_map.c \
-		source/ft_key_hook.c \
-		source/errors.c \
-		source/ft_map_cpy.c \
-		source/ft_checks.c \
+SRC = 	srcs/main.c \
+		srcs/ft_get_data.c  \
+		srcs/ft_draw_map.c \
+		srcs/ft_key_hook.c \
+		srcs/ft_checks.c \
+		srcs/utils.c \
 
 OBJS = $(SRC:%.c=%.o)
-
-MLX_LIB = mlx/
-MLX_FLAGS = -L mlx/ -lmlx -framework OpenGL -framework AppKit
-LIBFT_LIB = libft/
-LIBFT_FLAGS = -L libft/ -lft
-DEBUG_FLAGS = -g3 -fsanitize=address
-
-CC		= cc
-RM		= rm -f
-AR		= ar rcs
-
-CFLAGS = -Wall -Wextra -Werror
 
 all:	$(NAME)
 
 .c.o:
-		$(CC) $(DEBUG_FLAGS) $(CFLAGS) -c $< -o $(<:.c=.o)
+		$(CC) -I includes/. $(DEBUG_FLAGS) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJS)
 		make -C $(MLX_LIB)

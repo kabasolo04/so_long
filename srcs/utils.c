@@ -1,16 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_map_cpy.c                                       :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/05 13:42:10 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/02/26 12:25:59 by kabasolo         ###   ########.fr       */
+/*   Created: 2024/02/05 13:13:34 by kabasolo          #+#    #+#             */
+/*   Updated: 2024/02/27 10:37:54 by kabasolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../so_long.h"
+#include "so_long.h"
+
+int	ft_error(char *ms)
+{
+	write(2, "\nERROR: ", 8);
+	write(2, ms, ft_strlen(ms));
+	write(2, "\n\n", 2);
+	return (1);
+}
+
+void	ft_freemap(char **map)
+{
+	int	i;
+
+	i = 0;
+	while (map[i])
+		free(map[i ++]);
+	free(map);
+}
 
 void	ft_map_cpy(t_game *data)
 {

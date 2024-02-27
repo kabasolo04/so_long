@@ -6,11 +6,11 @@
 /*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 18:24:45 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/02/26 14:07:41 by kabasolo         ###   ########.fr       */
+/*   Updated: 2024/02/27 10:39:06 by kabasolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../so_long.h"
+#include "so_long.h"
 
 static int	ft_load_sprites(t_game *game)
 {
@@ -48,7 +48,7 @@ void	ft_draw_map(t_game *game)
 	size_t	x;
 
 	if (ft_load_sprites(game))
-		return (ft_errors(14), exit(0));
+		return (ft_error("Could not open textures."), exit(0));
 	y = 0;
 	while (y < game->lines)
 	{

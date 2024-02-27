@@ -6,15 +6,15 @@
 /*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 12:00:52 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/02/26 13:47:48 by kabasolo         ###   ########.fr       */
+/*   Updated: 2024/02/27 11:11:48 by kabasolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-# include "libft/libft.h"
-# include "mlx/mlx.h"
+# include "libft.h"
+# include "mlx.h"
 # include <fcntl.h>
 
 # define ESC 53
@@ -60,7 +60,7 @@ typedef struct s_game
 
 int		ft_key_hook(int key, t_game *g);
 int		ft_get_data(t_game *data, int fd);
-void	ft_errors(int e);
+int		ft_error(char *ms);
 void	ft_map_cpy(t_game *data);
 int		ft_checks(t_game *data);
 void	ft_draw_map(t_game *g);
