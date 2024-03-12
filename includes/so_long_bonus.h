@@ -1,33 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   so_long_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 12:00:52 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/03/04 16:18:38 by kabasolo         ###   ########.fr       */
+/*   Updated: 2024/03/11 12:24:57 by kabasolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#ifndef SO_LONG_BONUS_H
+# define SO_LONG_BONUS_H
 
 # include "libft.h"
 # include "mlx.h"
 # include <fcntl.h>
+# include <sys/time.h>
 
-# define ESC 53
-# define W 13
 # define A 0
 # define S 1
 # define D 2
-# define UP 126
-# define DOWN 125
+# define W 13
+# define ESC 53
 # define LEFT 123
 # define RIGHT 124
+# define DOWN 125
+# define UP 126
 
 # define PIX 100
+# define FRAME 16
+# define HEIGHT 11
+# define WIDTH 21
 
 typedef struct s_game
 {
@@ -44,9 +48,13 @@ typedef struct s_game
 	void	*player;
 
 	int		moves;
+	int		frame;
+	int		moving;
+	int		x_dir;
+	int		y_dir;
 
-	size_t	col;
-	size_t	lines;
+	int		col;
+	int		lines;
 
 	size_t	p;
 	size_t	c;
@@ -66,4 +74,4 @@ int		ft_checks(t_game *data);
 void	ft_draw_map(t_game *g);
 void	ft_freemap(char **map);
 
-#endif //SO_LONG_H
+#endif //SO_LONG_BONUS_H

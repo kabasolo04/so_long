@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_checks.c                                        :+:      :+:    :+:   */
+/*   ft_checks_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 12:03:51 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/03/11 16:33:32 by kabasolo         ###   ########.fr       */
+/*   Updated: 2024/03/04 16:37:50 by kabasolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 static int	ft_is_closed(char **map, int col, int lines)
 {

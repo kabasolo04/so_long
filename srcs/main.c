@@ -6,7 +6,7 @@
 /*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 17:55:26 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/02/27 10:38:05 by kabasolo         ###   ########.fr       */
+/*   Updated: 2024/03/08 17:35:13 by kabasolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	ft_start_game(t_game	game)
 			"SO_LONG");
 	ft_draw_map (&game);
 	mlx_hook(game.win_ptr, 17, 0, (int (*)())exit, &game);
-	mlx_key_hook(game.win_ptr, ft_key_hook, &game);
+	mlx_hook(game.win_ptr, 2, 0, (void *)ft_key_hook, &game);
 	mlx_loop (game.mlx);
 	ft_close(&game);
 }
