@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_draw_map.c                                      :+:      :+:    :+:   */
+/*   draw_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 18:24:45 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/03/08 18:21:52 by kabasolo         ###   ########.fr       */
+/*   Updated: 2024/03/21 11:15:28 by kabasolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static int	ft_load_sprites(t_game *game)
+static int	load_sprites(t_game *game)
 {
 	int	x;
 	int	y;
@@ -27,7 +27,7 @@ static int	ft_load_sprites(t_game *game)
 	return (1);
 }
 
-static void	ft_put_sprite(t_game *g, char c, int i, int j)
+static void	put_sprite(t_game *g, char c, int i, int j)
 {
 	if (c != '1')
 		mlx_put_image_to_window(g->mlx, g->win_ptr, g->floor, j * PIX, i * PIX);
@@ -42,13 +42,13 @@ static void	ft_put_sprite(t_game *g, char c, int i, int j)
 			j * PIX, i * PIX);
 }
 
-void	ft_draw_map(t_game *game)
+void	draw_map(t_game *game)
 {
 	size_t	y;
 	size_t	x;
 
-	if (ft_load_sprites(game))
-		return (ft_error("Could not open textures."), exit(0));
+	if (load_sprites(game))
+		return (error("Could not open textures."), exit(0));
 	y = 0;
 	while (y < game->lines)
 	{
@@ -56,9 +56,9 @@ void	ft_draw_map(t_game *game)
 		while (x < game->col)
 		{
 			if (y == game->p_y && x == game->p_x)
-				ft_put_sprite(game, 'P', y, x);
+				put_sprite(game, 'P', y, x);
 			else
-				ft_put_sprite(game, game->map[y][x], y, x);
+				put_sprite(game, game->map[y][x], y, x);
 			x ++;
 		}
 		y ++;

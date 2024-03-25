@@ -6,13 +6,13 @@
 /*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 13:13:34 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/03/08 17:57:58 by kabasolo         ###   ########.fr       */
+/*   Updated: 2024/03/18 14:50:08 by kabasolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
 
-int	ft_error(char *ms)
+int	error(char *ms)
 {
 	write(2, "\nERROR: ", 8);
 	write(2, ms, ft_strlen(ms));
@@ -20,7 +20,7 @@ int	ft_error(char *ms)
 	return (1);
 }
 
-void	ft_freemap(char **map)
+void	freemap(char **map)
 {
 	int	i;
 
@@ -30,28 +30,70 @@ void	ft_freemap(char **map)
 	free(map);
 }
 
-void	ft_map_cpy(t_game *data)
+char	**map_cpy(t_game *data)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
+	char	**map_cpy;
 
-	data->map_cpy = (char **)malloc((data->lines + 1) * sizeof(char *));
-	if (data->map_cpy == NULL)
-		return ;
+	map_cpy = (char **)malloc((data->lines + 1) * sizeof(char *));
+	if (!map_cpy)
+		return (NULL);
 	i = 0;
 	while (i < data->lines)
 	{
-		data->map_cpy[i] = (char *)malloc((data->col + 1) * sizeof(char));
-		if (data->map_cpy[i] == NULL)
-			return (ft_freemap(data->map_cpy));
+		map_cpy[i] = (char *)malloc((data->col + 1) * sizeof(char));
+		if (map_cpy[i] == NULL)
+			return (freemap(map_cpy), NULL);
 		j = 0;
 		while (j < data->col)
 		{
-			data->map_cpy[i][j] = data->map[i][j];
+			map_cpy[i][j] = data->map[i][j];
 			j ++;
 		}
-		data->map_cpy[i][j] = '\0';
+		map_cpy[i][j] = '\0';
 		i ++;
 	}
-	data->map_cpy[data->lines] = NULL;
+	map_cpy[i] = NULL;
+	return (map_cpy);
+}
+
+int	find(char **map, char c)
+{
+	int	i;
+	int	x;
+	int	y;
+
+	i = 0;
+	y = 0;
+	while (map[y])
+	{
+		x = 0;
+		while (map[y][x])
+		{
+			if (map[y][x] == c)
+				i ++;
+			x ++;
+		}
+		y ++;
+	}
+	return (i);
+}
+
+void	ft_close(t_game *game)
+{
+	if (game->mlx && game->win_ptr)
+		mlx_destroy_window (game->mlx, game->win_ptr);
+	if (game->wall)
+		mlx_destroy_image(game->mlx, game->wall);
+	if (game->floor)
+		mlx_destroy_image(game->mlx, game->floor);
+	if (game->coin)
+		mlx_destroy_image(game->mlx, game->coin);
+	if (game->exit)
+		mlx_destroy_image(game->mlx, game->exit);
+	free (game->mlx);
+	freemap (game->map);
+	close (game->fd);
+	exit(0);
 }

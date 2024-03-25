@@ -1,38 +1,55 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_key_hook_bonus.c                                :+:      :+:    :+:   */
+/*   key_hook.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 16:20:50 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/03/11 16:00:01 by kabasolo         ###   ########.fr       */
+/*   Updated: 2024/03/21 16:30:21 by kabasolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long_bonus.h"
+#include "so_long.h"
 
-int	ft_key_hook(int key, t_game *g)
+static void	refresh(t_game *g, size_t x, size_t y)
+{
+	int	i;
+
+	i = 0;
+	while (i ++ < 2)
+	{
+		if (g->map[g->p_y][g->p_x] != 'E')
+			mlx_put_image_to_window(g->mlx, g->win_ptr, g->floor, g->p_x * PIX,
+				g->p_y * PIX);
+		else
+			mlx_put_image_to_window(g->mlx, g->win_ptr, g->exit, g->p_x * PIX,
+				g->p_y * PIX);
+		g->p_x = x;
+		g->p_y = y;
+	}
+	mlx_put_image_to_window(g->mlx, g->win_ptr, g->player, x * PIX, y * PIX);
+}
+
+int	key_hook(int key, t_game *g)
 {
 	size_t	x;
 	size_t	y;
 
-	if (key == ESC)
-		exit (0);
-	if (g->moving)
-		return (0);
 	x = g->p_x + (key == D || key == RIGHT) - (key == A || key == LEFT);
 	y = g->p_y + (key == S || key == DOWN) - (key == W || key == UP);
 	if (g->map[y][x] != '1' && !(x == g->p_x && y == g->p_y))
 	{
-		ft_printf("Moves: %d\n", g->moves ++);
-		g->p_x = x;
-		g->p_y = y;
-		g->x_dir = (key == A || key == LEFT) - (key == D || key == RIGHT);
-		g->y_dir = (key == W || key == UP) - (key == S || key == DOWN);
-		g->frame = 0;
-		g->moving = 1;
+		g->moves ++;
+		ft_printf("Moves: %d\n", g->moves);
+		if (g->map[y][x] == 'C')
+		{
+			g->c --;
+			g->map[y][x] = '0';
+		}
+		refresh(g, x, y);
 	}
+	if (key == ESC || (g->map[g->p_y][g->p_x] == 'E' && g->c == 0))
+		ft_close(g);
 	return (0);
 }
-

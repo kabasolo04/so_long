@@ -6,7 +6,7 @@
 /*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 12:00:52 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/03/11 12:24:57 by kabasolo         ###   ########.fr       */
+/*   Updated: 2024/03/21 14:08:16 by kabasolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include "libft.h"
 # include "mlx.h"
 # include <fcntl.h>
-# include <sys/time.h>
 
 # define A 0
 # define S 1
@@ -36,7 +35,6 @@
 typedef struct s_game
 {
 	char	**map;
-	char	**map_cpy;
 
 	void	*mlx;
 	void	*win_ptr;
@@ -62,16 +60,16 @@ typedef struct s_game
 
 	size_t	p_x;
 	size_t	p_y;
-
-	int		fd;
 }	t_game;
 
-int		ft_key_hook(int key, t_game *g);
-int		ft_get_data(t_game *data, int fd);
-int		ft_error(char *ms);
-void	ft_map_cpy(t_game *data);
-int		ft_checks(t_game *data);
-void	ft_draw_map(t_game *g);
-void	ft_freemap(char **map);
+int		key_hook(int key, t_game *g);
+int		get_data(t_game *data, int fd);
+int		error(char *ms);
+char	**map_cpy(t_game *data);
+int		find(char **map, char c);
+void	ft_close(t_game *game);
+int		checks(t_game *data);
+void	draw_map(t_game *g);
+void	freemap(char **map);
 
 #endif //SO_LONG_BONUS_H

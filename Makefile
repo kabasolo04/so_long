@@ -1,25 +1,25 @@
 NAME = so_long
 BONUS_NAME = so_long_bonus
-CC= cc
+CC = cc
 MLX_LIB = libs/mlx/
 MLX_FLAGS = -L libs/mlx/ -lmlx -framework OpenGL -framework AppKit
 LIBFT_LIB = libs/libft/
 LIBFT_FLAGS = -L libs/libft/ -lft
-CFLAGS = -O2 -Wall -Wextra -Werror #-fsanitize=address -g3
+CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g3
 RM		= rm -f
 
 SRC = 	srcs/main.c \
-		srcs/ft_get_data.c  \
-		srcs/ft_draw_map.c \
-		srcs/ft_key_hook.c \
-		srcs/ft_checks.c \
+		srcs/get_data.c  \
+		srcs/draw_map.c \
+		srcs/key_hook.c \
+		srcs/checks.c \
 		srcs/utils.c \
 
 SRC_BONUS = 	srcs_bonus/main_bonus.c \
-				srcs_bonus/ft_get_data_bonus.c  \
-				srcs_bonus/ft_draw_map_bonus.c \
-				srcs_bonus/ft_key_hook_bonus.c \
-				srcs_bonus/ft_checks_bonus.c \
+				srcs_bonus/get_data_bonus.c  \
+				srcs_bonus/draw_map_bonus.c \
+				srcs_bonus/key_hook_bonus.c \
+				srcs_bonus/checks_bonus.c \
 				srcs_bonus/utils_bonus.c \
 
 OBJS = $(SRC:%.c=%.o)
@@ -34,11 +34,6 @@ $(NAME): $(OBJS)
 		make -C $(MLX_LIB)
 		make -C $(LIBFT_LIB)
 		$(CC) $(CFLAGS) $(OBJS) $(MLX_FLAGS) $(LIBFT_FLAGS) -o $(NAME)
-
-sanitize:
-	$(eval CFLAGS += -fsanitize=address -g3)
-
-sani: sanitize all
 
 bonus: $(BONUS_NAME)
 
