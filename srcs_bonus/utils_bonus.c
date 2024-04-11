@@ -6,7 +6,7 @@
 /*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 13:13:34 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/03/18 14:50:08 by kabasolo         ###   ########.fr       */
+/*   Updated: 2024/03/29 14:41:16 by kabasolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,5 @@ void	ft_close(t_game *game)
 		mlx_destroy_image(game->mlx, game->exit);
 	free (game->mlx);
 	freemap (game->map);
-	close (game->fd);
 	exit(0);
 }

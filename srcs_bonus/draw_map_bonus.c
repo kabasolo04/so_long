@@ -6,7 +6,7 @@
 /*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 18:24:45 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/03/19 16:41:47 by kabasolo         ###   ########.fr       */
+/*   Updated: 2024/04/03 14:24:41 by kabasolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ static void	put_sprite(t_game *g, char c, int x, int y)
 	y_des = g->y_dir * (PIX / FRAME) * g->frame;
 	x_pix = (x - g->x_dir * g->moving) * PIX + x_des * g->moving;
 	y_pix = (y - g->y_dir * g->moving)  * PIX + y_des * g->moving;
-	if (c != '1')
-		mlx_put_image_to_window(g->mlx, g->win_ptr, g->floor, x_pix, y_pix);
 	if (c == '1')
 		mlx_put_image_to_window(g->mlx, g->win_ptr, g->wall, x_pix, y_pix);
+	else
+		mlx_put_image_to_window(g->mlx, g->win_ptr, g->floor, x_pix, y_pix);
 	if (c == 'C')
 		mlx_put_image_to_window(g->mlx, g->win_ptr, g->coin, x_pix, y_pix);
 	if (c == 'E')

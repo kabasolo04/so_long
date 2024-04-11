@@ -6,7 +6,7 @@
 /*   By: kabasolo <kabasolo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 17:55:26 by kabasolo          #+#    #+#             */
-/*   Updated: 2024/03/21 14:33:57 by kabasolo         ###   ########.fr       */
+/*   Updated: 2024/04/09 13:07:52 by kabasolo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static void	start_game(t_game	game)
 	game.moves = 0;
 	game.moving = 1;
 	game.frame = 0;
-	game.win_ptr = mlx_new_window (game.mlx, WIDTH * PIX, HEIGHT * PIX, "SO_LONG");
+	game.win_ptr = mlx_new_window (game.mlx, WIDTH * PIX, HEIGHT * PIX, "SO_LONG_BONUS");
 	if (load_sprites(&game))
 		return (error("Could not open textures."), exit(0));
 	mlx_loop_hook(game.mlx, animation, &game);
